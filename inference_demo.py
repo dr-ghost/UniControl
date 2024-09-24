@@ -23,7 +23,7 @@ import os
 from cldm.ddim_unicontrol_hacked import DDIMSampler
 import random
 from torchvision.utils import make_grid
-from utils import check_safety
+#from utils import check_safety
 
 parser = argparse.ArgumentParser(description="args")
 parser.add_argument("--task", type=str, default='canny', choices=['canny', 'hed', 'seg', 'normal', 'depth','openpose', 'imageedit', 'bbox', 'hedsketch', 'outpainting', 'grayscale', 'blur', 'inpainting', 'grayscale'], help='option of task')
