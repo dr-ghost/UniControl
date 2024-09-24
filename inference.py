@@ -73,7 +73,7 @@ task_name = task
 path_json = "data/n_task.json"
 
 with jsonlines.open(path_json, mode='w') as writer:
-    writer.write({"source": "./aesthetics_6_plus_6_300_512plus/source_148.jpg", "prompt": args.prompt, "control_openpose": args.ctrl_img})
+    writer.write({"source": "./aesthetics_6_plus_6_300_512plus/source_148.jpg", "prompt": args.prompt, f"control_{task_name}": args.ctrl_img})
 
 
 
