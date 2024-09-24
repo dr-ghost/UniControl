@@ -136,3 +136,4 @@ with torch.no_grad():
             base_count += 1
         control_img = Image.fromarray((batch['hint'].squeeze(0).cpu().numpy() *  255.0).astype(np.uint8))
         control_img.save(os.path.join(sample_path, prompt.replace(" ", "-")[:-1] + '-'+ 'control' + ".png"))
+        print("Done atleast once")
