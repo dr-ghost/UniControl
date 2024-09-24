@@ -60,7 +60,7 @@ model.load_state_dict(load_state_dict(checkpoint_path, location='cpu'), strict=F
 task=args.task
 
 
-output_dir = os.path.join(args.output_path, 'scale'+str(int(args.scale)), task)
+output_dir = os.path.join(args.output_path)
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
     
@@ -94,10 +94,10 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 model.to(device)
 ddim_sampler = DDIMSampler(model)
     
-sample_path = os.path.join(output_dir, "samples")
-os.makedirs(sample_path, exist_ok=True)
-base_count = len(os.listdir(sample_path))
-grid_count = len(os.listdir(output_dir)) - 1
+#sample_path = os.path.join(output_dir, "samples")
+#os.makedirs(sample_path, exist_ok=True)
+#base_count = len(os.listdir(sample_path))
+#grid_count = len(os.listdir(output_dir)) - 1
 
 a_prompt = 'best quality, extremely detailed'
 # Inference loop
@@ -142,9 +142,8 @@ with torch.no_grad():
         for x_sample in x_checked_image_torch:
             x_sample = 255. * einops.rearrange(x_sample.cpu().numpy(), 'c h w -> h w c')
             img = Image.fromarray(x_sample.astype(np.uint8))
-            img.save(os.path.join(sample_path, "nimg" + ".png"))
-            base_count += 1
+            img.save(os.path.join(output_dir, "nimg" + ".png"))
         control_img = Image.fromarray((batch['hint'].squeeze(0).cpu().numpy() *  255.0).astype(np.uint8))
-        control_img.save(os.path.join(sample_path, prompt.replace(" ", "-")[:-1] + '-'+ 'control' + ".png"))
+        control_img.save(os.path.join(output_dir, 'nimg' + '-'+ 'control' + ".png"))
         print("Done atleast once")
         
