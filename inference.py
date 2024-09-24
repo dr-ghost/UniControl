@@ -143,7 +143,6 @@ with torch.no_grad():
             x_sample = 255. * einops.rearrange(x_sample.cpu().numpy(), 'c h w -> h w c')
             img = Image.fromarray(x_sample.astype(np.uint8))
             img.save(os.path.join(sample_path, "nimg" + ".png"))
-            plt.imshow(img)
             base_count += 1
         control_img = Image.fromarray((batch['hint'].squeeze(0).cpu().numpy() *  255.0).astype(np.uint8))
         control_img.save(os.path.join(sample_path, prompt.replace(" ", "-")[:-1] + '-'+ 'control' + ".png"))
